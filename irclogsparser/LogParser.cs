@@ -25,6 +25,10 @@ namespace irclogsparser
                 {
                     yield return message;
                 }
+                else if (KickedMessage.TryCreate(line, currentTime, out var message))
+                {
+                    yield return message;
+                }
             }
         }
     }

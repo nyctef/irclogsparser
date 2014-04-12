@@ -42,6 +42,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="KickedMessage.cs" />
     <Compile Include="LogMessage.cs" />
     <Compile Include="LogParser.cs" />
     <Compile Include="LogStartedMessage.cs" />
