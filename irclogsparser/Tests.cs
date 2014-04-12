@@ -43,5 +43,18 @@ namespace irclogsparser
             var logMessage = new LogParser().Parse(logFile).Single();
             Assert.Equal(expected, logMessage);
         }
+
+        [Fact]
+        public void CanParseKick()
+        {
+            var logFile = 
+@"--- Log opened Tue Dec 24 00:26:23 2013
+04:28 -!- :owl was kicked from general@conference.friendshipismagicsquad.com by general@conference.friendshipismagicsquad.com [:sweetiestare:]";
+
+            var expected = new KickedMessage(new DateTime(2013, 12, 24, 4, 28, 0), ":owl", ":sweetiestare:");
+            var logMessage = new LogParser().Parse(logFile).Single().Cast<KickedMessage>();
+
+            Assert.Equal(expected, logMessage);
+        }
     }
 }
