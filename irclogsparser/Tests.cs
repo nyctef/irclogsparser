@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 
 namespace irclogsparser
@@ -19,8 +20,8 @@ namespace irclogsparser
                 new LogMessage(new DateTime(2013, 12, 24, 0, 35, 0, 0), "Nyctef", "I said-a hey"),
                 new LogMessage(new DateTime(2013, 12, 24, 0, 35, 0, 0), "Nyctef", "what's goin on"),
             };
-
-            Assert.Equal(expected, new LogParser().Parse(logFile));
+            var actual = new LogParser().Parse(logFile).ToList();
+            Assert.Equal(expected, actual);
         }
     }
 }
