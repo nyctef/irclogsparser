@@ -21,6 +21,10 @@ namespace irclogsparser
                 {
                     yield return message;
                 }
+                else if (LogMessage.TryCreateDelayed(line, out var message))
+                {
+                    yield return message;
+                }
             }
         }
     }

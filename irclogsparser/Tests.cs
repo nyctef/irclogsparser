@@ -32,5 +32,16 @@ namespace irclogsparser
             var logMessage = new LogParser().Parse(logFile).Single();
             Assert.Equal("Rainbow Dash", logMessage.Speaker);
         }
+
+        [Fact]
+        public void CanParseDelayedMessage()
+        {
+            var logFile = @"00:26 [2013-12-24 00:15] < Nightmare Moon> BEEP BEEP MOTHERFUCKERS!!!";
+
+            var expected = new LogMessage(new DateTime(2013, 12, 24, 0, 15, 0), "Nightmare Moon", "BEEP BEEP MOTHERFUCKERS!!!");
+
+            var logMessage = new LogParser().Parse(logFile).Single();
+            Assert.Equal(expected, logMessage);
+        }
     }
 }

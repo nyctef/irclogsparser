@@ -59,5 +59,25 @@ namespace irclogsparser
             message = null;
             return false;
         }
+
+        public static bool TryCreateDelayed(string input, out LogMessage message)
+        {
+            var match = new Regex(@"^\d\d:\d\d \[(\d{4})-(\d\d)-(\d\d) (\d\d):(\d\d)\] <[ &]([^>]+)> (.*)$").Match(input);
+            if (match.Success)
+            {
+                var year = int.Parse(match.Groups[1].Value);
+                var month = int.Parse(match.Groups[2].Value);
+                var day = int.Parse(match.Groups[3].Value);
+                var hours = int.Parse(match.Groups[4].Value);
+                var minutes = int.Parse(match.Groups[5].Value);
+                var time = new DateTime(year, month, day, hours, minutes, 0);
+                var speaker = match.Groups[6].Value;
+                var text = match.Groups[7].Value;
+                message = new LogMessage(time, speaker, text);
+                return true;
+            }
+            message = null;
+            return false;
+        }
     }
 }
