@@ -17,6 +17,10 @@ namespace irclogsparser
                 {
                     currentTime = logStartedMessage.Time;
                 }
+                else if (DayChangedMessage.TryCreate(line, out var dayChangedMessage))
+                {
+                    currentTime = dayChangedMessage.Time;
+                }
                 else if (LogMessage.TryCreate(line, currentTime, out var message))
                 {
                     yield return message;

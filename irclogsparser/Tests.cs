@@ -68,7 +68,7 @@ namespace irclogsparser
 
             var expected = new List<LogMessage>
             {
-                new LogMessage(new DateTime(2013, 12, 24, 23, 55, 0), "Sweetiebot", "Ask Fluffle Puff, I gave her the pomf"),
+                new LogMessage(new DateTime(2013, 12, 24, 23, 55, 0), "Sweetiebot", "Ask Fluffle Puff, I gave her the pomf."),
                 new LogMessage(new DateTime(2013, 12, 25, 0, 0, 0), "Nyctef", "MERRY CHRISTMAS BRITFAGS :santashy:"),
             };
 
