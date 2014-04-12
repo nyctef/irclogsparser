@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 
 namespace irclogsparser
 {
-    class LogMessage : IEquatable<LogMessage>
+    public class LogMessage : IEquatable<LogMessage>
     {
         private static readonly Regex regex = new Regex(@"^(\d\d):(\d\d) <[ &]([^>]+)> (.*)$", RegexOptions.Compiled);
         private static readonly Regex delayedRegex = new Regex(@"^\d\d:\d\d \[(\d{4})-(\d\d)-(\d\d) (\d\d):(\d\d)\] <[ &]([^>]+)> (.*)$", RegexOptions.Compiled);

@@ -5,9 +5,9 @@ using System.Text;
 
 namespace irclogsparser
 {
-    class LogParser
+    public class LogParser
     {
-        internal IEnumerable<LogMessage> Parse(string logFile)
+        public IEnumerable<LogMessage> Parse(string logFile)
         {
             var lines = logFile.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
             var currentTime = DateTime.Now;
