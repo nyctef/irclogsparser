@@ -23,5 +23,14 @@ namespace irclogsparser
             var actual = new LogParser().Parse(logFile).ToList();
             Assert.Equal(expected, actual);
         }
+
+        [Fact]
+        public void CanParseMessageFromMod()
+        {
+            var logFile = @"00:58 <&Rainbow Dash> NEVER FORGET";
+
+            var logMessage = new LogParser().Parse(logFile).Single();
+            Assert.Equal("Rainbow Dash", logMessage.Speaker);
+        }
     }
 }

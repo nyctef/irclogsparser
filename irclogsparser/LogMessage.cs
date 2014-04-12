@@ -12,6 +12,8 @@ namespace irclogsparser
         private string speaker;
         private string message;
 
+        public string Speaker { get { return speaker; } }
+
         public LogMessage(DateTime dateTime, string speaker, string message)
         {
             this.dateTime = dateTime;
@@ -43,7 +45,7 @@ namespace irclogsparser
 
         public static bool TryCreate(string input, DateTime currentTime, out LogMessage message) 
         {
-            var match = new Regex(@"^(\d\d):(\d\d) < ([^>]+)> (.*)$").Match(input);
+            var match = new Regex(@"^(\d\d):(\d\d) <[ &]([^>]+)> (.*)$").Match(input);
             if (match.Success)
             {
                 var hours = int.Parse(match.Groups[1].Value);
