@@ -52,7 +52,7 @@ namespace irclogsparser
 04:28 -!- :owl was kicked from general@conference.friendshipismagicsquad.com by general@conference.friendshipismagicsquad.com [:sweetiestare:]";
 
             var expected = new KickedMessage(new DateTime(2013, 12, 24, 4, 28, 0), ":owl", ":sweetiestare:");
-            var logMessage = new LogParser().Parse(logFile).Single().Cast<KickedMessage>();
+            var logMessage = new LogParser().Parse(logFile).Cast<KickedMessage>().Single();
 
             Assert.Equal(expected, logMessage);
         }
