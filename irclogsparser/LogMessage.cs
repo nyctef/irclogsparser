@@ -8,6 +8,9 @@ namespace irclogsparser
 {
     class LogMessage : IEquatable<LogMessage>
     {
+        private static readonly Regex regex = new Regex(@"^(\d\d):(\d\d) <[ &]([^>]+)> (.*)$", RegexOptions.Compiled);
+        private static readonly Regex delayedRegex = new Regex(@"^\d\d:\d\d \[(\d{4})-(\d\d)-(\d\d) (\d\d):(\d\d)\] <[ &]([^>]+)> (.*)$", RegexOptions.Compiled);
+
         private DateTime dateTime;
         private string speaker;
         private string message;
@@ -45,7 +48,7 @@ namespace irclogsparser
 
         public static bool TryCreate(string input, DateTime currentTime, out LogMessage message) 
         {
-            var match = new Regex(@"^(\d\d):(\d\d) <[ &]([^>]+)> (.*)$").Match(input);
+            var match = regex.Match(input);
             if (match.Success)
             {
                 var hours = int.Parse(match.Groups[1].Value);
@@ -62,7 +65,7 @@ namespace irclogsparser
 
         public static bool TryCreateDelayed(string input, out LogMessage message)
         {
-            var match = new Regex(@"^\d\d:\d\d \[(\d{4})-(\d\d)-(\d\d) (\d\d):(\d\d)\] <[ &]([^>]+)> (.*)$").Match(input);
+            var match = delayedRegex.Match(input);
             if (match.Success)
             {
                 var year = int.Parse(match.Groups[1].Value);

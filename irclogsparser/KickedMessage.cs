@@ -7,6 +7,8 @@ namespace irclogsparser
     {
         public string KickedPerson { get { return Speaker; } }
 
+        private static readonly Regex regex = new Regex(@"^(\d\d):(\d\d) -!- (.*?) was kicked from [^ ]+ by [^ ]+ \[(.*)\]$", RegexOptions.Compiled);
+
         public KickedMessage(DateTime dateTime, string kickedPerson, string kickmessage)
             :base(dateTime, kickedPerson, kickmessage)
         {
@@ -14,7 +16,7 @@ namespace irclogsparser
 
         public static bool TryCreate(string input, DateTime currentTime, out KickedMessage message)
         {
-            var match = new Regex(@"^(\d\d):(\d\d) -!- (.*?) was kicked from [^ ]+ by [^ ]+ \[(.*)\]$").Match(input);
+            var match = regex.Match(input);
             if (match.Success)
             {
                 var hours = int.Parse(match.Groups[1].Value);

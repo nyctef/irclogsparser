@@ -7,6 +7,7 @@ namespace irclogsparser
     internal class LogStartedMessage
     {
         private readonly DateTime time;
+        private static readonly Regex regex = new Regex(@"^--- Log opened (.*)$", RegexOptions.Compiled);
 
         public LogStartedMessage(DateTime time)
         {
@@ -17,7 +18,7 @@ namespace irclogsparser
 
         public static bool TryCreate(string input, out LogStartedMessage message)
         {
-            var match = new Regex(@"^--- Log opened (.*)$").Match(input);
+            var match = regex.Match(input);
             if (match.Success && DateTime.TryParseExact(match.Groups[1].Value, "ddd MMM dd hh:mm:ss yyyy", null, DateTimeStyles.None, out var time))
             {
                 message = new LogStartedMessage(time);
