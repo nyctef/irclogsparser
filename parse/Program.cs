@@ -22,10 +22,8 @@ namespace parse
             if (args[1] == "kicks")
             {
                 ListKicks(messages);
-                return;
             }
-
-            if (args[1] == "pushtobus")
+            else if (args[1] == "pushtobus")
             {
                 PushToBus(args, messages);
             }

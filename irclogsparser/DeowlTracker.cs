@@ -30,7 +30,9 @@ namespace irclogsparser
                         lastDeowlAttemptUsername = null;
                     }
 
-                } else if ((var kickedMessage = message as KickedMessage) != null) {
+                }
+                else if ((var kickedMessage = message as KickedMessage) != null)
+                {
                     if (i >= 1 && lastDeowlAttemptUsername != null && 
                         kickedMessage.KickedPerson == ":owl" && 
                         kickedMessage.Message == ":sweetiestare:")
