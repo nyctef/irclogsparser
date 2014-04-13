@@ -16,6 +16,8 @@ namespace irclogsparser
         private string message;
 
         public string Speaker { get { return speaker; } }
+        public DateTime DateTime { get { return dateTime; } }
+        public string Message { get { return message; } }
 
         public LogMessage(DateTime dateTime, string speaker, string message)
         {
