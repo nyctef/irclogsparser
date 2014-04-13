@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DayChangedMessage.cs" />
+    <Compile Include="Deowl.cs" />
+    <Compile Include="DeowlTracker.cs" />
     <Compile Include="KickedMessage.cs" />
     <Compile Include="LogMessage.cs" />
     <Compile Include="LogParser.cs" />
