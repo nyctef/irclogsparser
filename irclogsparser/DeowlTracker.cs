@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 namespace irclogsparser
 {
-    internal class DeowlTracker
+    public class DeowlTracker
     {
         public DeowlTracker()
         {
         }
 
-        internal IEnumerable<Deowl> Run(List<LogMessage> messages)
+        public IEnumerable<Deowl> Run(List<LogMessage> messages)
         {
             string lastDeowlAttemptUsername = null;
             for (int i=0; i<messages.Count;i++)

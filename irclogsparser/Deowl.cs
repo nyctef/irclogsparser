@@ -2,7 +2,7 @@ using System;
 
 namespace irclogsparser
 {
-    internal class Deowl : IEquatable<Deowl>
+    public class Deowl : IEquatable<Deowl>
     {
         public string Name;
         public bool Success;

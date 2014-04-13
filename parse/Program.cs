@@ -27,6 +27,74 @@ namespace parse
             {
                 PushToBus(args, messages);
             }
+            else if (args[1] == "deowls")
+            {
+                PrintDeowls(messages);
+            }
+            else if (args[1] == "pushdeowls")
+            {
+                PushDeowls(args, messages);
+            }
+        }
+
+        private static void PushDeowls(string[] args, List<LogMessage> messages)
+        {
+            var connectionString = args[2];
+            var topic = args[3];
+            var server = args[4];
+            var room = args[5];
+
+            var deowls = GetDeowls(messages);
+
+            var jsonMessages = deowls.Select(x => JsonConvert.SerializeObject(new
+            {
+                speaker = x.Name,
+                deowl = true,
+                success = x.Success,
+                room = room,
+                server = server,
+            })).ToList();
+
+            var client = TopicClient.CreateFromConnectionString(connectionString, topic);
+
+            foreach (var jsonMessage in jsonMessages)
+            {
+                while (true)
+                {
+                    try
+                    {
+                        BrokeredMessage brokerMessage;
+                        using (var stream = GenerateStreamFromString(jsonMessage))
+                        {
+                            brokerMessage = new BrokeredMessage(stream);
+
+                            client.Send(brokerMessage);
+                        }
+                        break;
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine("Error: " + e);
+                        Thread.Sleep(5000);
+                    }
+                }
+            };
+        }
+
+        private static void PrintDeowls(List<LogMessage> messages)
+        {
+            IEnumerable<Deowl> deowls = GetDeowls(messages);
+            foreach (var deowl in deowls)
+            {
+                Console.WriteLine("{0} {1}", deowl.Name, deowl.Success);
+            }
+        }
+
+        private static IEnumerable<Deowl> GetDeowls(List<LogMessage> messages)
+        {
+            var tracker = new DeowlTracker();
+            var deowls = tracker.Run(messages);
+            return deowls;
         }
 
         private static MemoryStream GenerateStreamFromString(string value)
