@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace irclogsparser
 {
-    internal class KickedMessage : LogMessage
+    public class KickedMessage : LogMessage
     {
         public string KickedPerson { get { return Speaker; } }
 
