@@ -93,5 +93,22 @@ namespace irclogsparser
 
             Assert.Equal(expected, deowls);
         }
+
+        [Fact]
+        public void CanTrackDeowlFailure()
+        {
+            var messages = new List<LogMessage>
+            {
+                new LogMessage(new DateTime(2013, 12, 24, 23, 55, 0), "Rarity", "Sweetiebot: deowl because reasons"),
+                new LogMessage(new DateTime(2013, 12, 25, 0, 0, 0), "Sweetiebot", "I'm tired. Maybe another time?"),
+            };
+
+            var tracker = new DeowlTracker();
+            var deowls = tracker.Run(messages);
+
+            var expected = new List<Deowl> { new Deowl("Rarity", false) };
+
+            Assert.Equal(expected, deowls);
+        }
     }
 }
