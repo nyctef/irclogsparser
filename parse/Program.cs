@@ -35,6 +35,20 @@ namespace parse
             {
                 PushDeowls(args, messages);
             }
+            else if (args[1] == "dumpmessagetext")
+            {
+                DumpMessages(messages);
+            }
+        }
+
+        private static void DumpMessages(List<LogMessage> messages)
+        {
+            var output = new StringBuilder();
+            foreach (var message in messages.Where(m => m.GetType() == typeof(LogMessage)))
+            {
+                output.AppendLine(message.Message);
+            }
+            File.WriteAllText("output.txt", output.ToString());
         }
 
         private static void PushDeowls(string[] args, List<LogMessage> messages)
